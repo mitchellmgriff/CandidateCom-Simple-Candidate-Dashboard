@@ -1,0 +1,23 @@
+﻿@model CandidateWebApplication.Models.Candidates
+<a asp-action="Index" asp-controller="Candidates" class="btn btn-outline-warning">Go Back</a>
+
+<div class="card bg-body w-75 mx-auto">
+  <div class="card-header">
+        <a href="@Model.Linkedin" class="btn btn-warning">Linkedin</a>
+   <h5 class="text-center text-warning display-5">@Model.FirstName @Model.LastName</h5>
+   
+
+  </div>
+  <div class="card-body">
+    <h5 class="card-title text-center text-warning">@Model.JobTitle at @Model.CompanyName</h5>
+        <p class="card-text"><ul class="list-group list-group-flush">
+  <li class="list-group-item"><b>Phone:</b> @Model.PhoneNumber</li>
+                <li class="list-group-item"><b>Email:</b> @Model.Email</li>
+                <li class="list-group-item"><b>Address:</b> @Model.Address</li>
+                <li class="list-group-item"><b>Hourly:</b> @Model.HourlyRate</li>
+                <li class="list-group-item"><b>Salary:</b> @Model.Salary</li>
+</ul></p>
+   
+  </div>
+
+</div>

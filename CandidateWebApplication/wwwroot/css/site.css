@@ -1,0 +1,53 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #1D2228;
+    color: #E1E2E2;
+}
+.form-control {
+    background-color: #E1E2E2;
+}
+td, th {
+    color: #E1E2E2;
+}
+.list-group-item {
+    background-color: #f0ad4e;
+    color: #1D2228;
+}
+.navbar {
+    background-color: #1D2228;
+    color: #1D2228;
+}
+.logo {
+    width:35px;
+    height:35px;
+}
+.banner{
+    width:100%;
+    position:absolute;
+}
+.Title{
+ 
+    position: absolute;
+    color:black;
+}
+.login {
+    position:absolute;
+    right:0px;
+   
+    
+}

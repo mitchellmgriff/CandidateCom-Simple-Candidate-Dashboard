@@ -1,0 +1,53 @@
+﻿@model CandidateWebApplication.Models.Candidates
+
+
+<form method="POST" asp-action="Add" class="row g-3">
+    <div class="col-md-6">
+    <label asp-for="FirstName" class="form-label">First name: </label>
+    <input asp-for="FirstName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="LastName" class="form-label">Last name: </label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="JobTitle" class="form-label">Job Title: </label>
+        <input asp-for="JobTitle" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="CompanyName" class="form-label">Current Company: </label>
+        <input asp-for="CompanyName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="PhoneNumber" class="form-label">Phone: </label>
+        <input asp-for="PhoneNumber" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Email" class="form-label">Email: </label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="col-12">
+        <label asp-for="Address" class="form-label">Address: </label>
+        <input asp-for="Address" class="form-control" />
+    </div>
+    <div class="col-12">
+        <label asp-for="Linkedin" class="form-label">Linkedin: </label>
+        <input asp-for="Linkedin" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="HourlyRate" class="form-label">Hourly: </label>
+        <input asp-for="HourlyRate" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Salary" class="form-label">Salary: </label>
+        <input asp-for="Salary" class="form-control" />
+    </div>
+
+
+    <button type="submit" class="btn btn-outline-success w-50 mx-auto">Add Candidate</button>
+
+
+
+</form>
+
+    
