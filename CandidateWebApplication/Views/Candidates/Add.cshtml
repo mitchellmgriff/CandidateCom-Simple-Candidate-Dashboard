@@ -1,46 +1,47 @@
 ﻿@model CandidateWebApplication.Models.Candidates
 
 
-<form method="POST" asp-action="Add" class="row g-3">
+<h5 class="display-6 form-label">Add New Candidate</h5>
+<form method="POST" asp-action="Add" class="row g-3 p-5 m-auto">
     <div class="col-md-6">
-    <label asp-for="FirstName" class="form-label">First name: </label>
-    <input asp-for="FirstName" class="form-control" />
+    
+        <input asp-for="FirstName" placeholder="First Name" class="form-control" />
     </div>
     <div class="col-md-6">
-        <label asp-for="LastName" class="form-label">Last name: </label>
-        <input asp-for="LastName" class="form-control" />
+      
+        <input asp-for="LastName" placeholder="Last Name" class="form-control" />
     </div>
     <div class="col-md-6">
-        <label asp-for="JobTitle" class="form-label">Job Title: </label>
-        <input asp-for="JobTitle" class="form-control" />
+        
+        <input asp-for="JobTitle" placeholder="Job Title" class="form-control" />
     </div>
     <div class="col-md-6">
-        <label asp-for="CompanyName" class="form-label">Current Company: </label>
-        <input asp-for="CompanyName" class="form-control" />
+       
+        <input asp-for="CompanyName" placeholder="Current Company" class="form-control" />
     </div>
     <div class="col-md-6">
-        <label asp-for="PhoneNumber" class="form-label">Phone: </label>
-        <input asp-for="PhoneNumber" class="form-control" />
+       
+        <input asp-for="PhoneNumber" placeholder="Phone Number" class="form-control" />
     </div>
     <div class="col-md-6">
-        <label asp-for="Email" class="form-label">Email: </label>
-        <input asp-for="Email" class="form-control" />
+        
+        <input asp-for="Email" placeholder="Email Address" class="form-control" />
     </div>
     <div class="col-12">
-        <label asp-for="Address" class="form-label">Address: </label>
-        <input asp-for="Address" class="form-control" />
+        
+        <input asp-for="Address" placeholder="Address" class="form-control" />
     </div>
     <div class="col-12">
-        <label asp-for="Linkedin" class="form-label">Linkedin: </label>
-        <input asp-for="Linkedin" class="form-control" />
+        
+        <input asp-for="Linkedin" placeholder="Linkedin" class="form-control" />
     </div>
     <div class="col-md-6">
-        <label asp-for="HourlyRate" class="form-label">Hourly: </label>
-        <input asp-for="HourlyRate" class="form-control" />
+        
+        <input asp-for="HourlyRate" placeholder="Hourly"class="form-control" />
     </div>
     <div class="col-md-6">
-        <label asp-for="Salary" class="form-label">Salary: </label>
-        <input asp-for="Salary" class="form-control" />
+        
+        <input asp-for="Salary" placeholder="Salary" class="form-control" />
     </div>
 
 

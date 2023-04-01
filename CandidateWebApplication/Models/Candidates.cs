@@ -17,6 +17,6 @@
 
         public string? Linkedin { get; set; }
 
-
+        public string UserId { get; set; }
     }
 }

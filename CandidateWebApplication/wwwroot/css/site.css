@@ -31,10 +31,13 @@ td, th {
 .navbar {
     background-color: #1D2228;
     color: #1D2228;
+    height:65px;
+    padding: 15px;
+    
 }
 .logo {
-    width:35px;
-    height:35px;
+    width:45px;
+    height:40px;
 }
 .banner{
     width:100%;
@@ -50,4 +53,36 @@ td, th {
     right:0px;
    
     
+}
+
+.quotes {
+    margin-top: 28%;
+   
+}
+
+.profile{
+    width:90px;
+    height:130px;
+}
+
+.quote {
+    background-color: #E1E2E2;
+    color: #1D2228;
+     padding: 15px;
+}
+
+.loginscreen {
+    margin-left: 28%;
+    width:1800px;
+}
+
+.form-label {
+    color:black;
+}
+.icon {
+    margin-left: 400px;
+   
+}
+.lbl {
+    margin-left: 38%;
 }

@@ -1,30 +1,46 @@
 ﻿using CandidateWebApplication.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CandidateWebApplication.Controllers
 {
+    [Authorize]
     public class CandidatesController : Controller
     {
 
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public CandidatesController(ApplicationDbContext context) { _context = context; }
+        public CandidatesController(ApplicationDbContext context, UserManager<IdentityUser> userManager = null)
+        {
+            _context = context; _userManager = userManager;
+
+        }
+
         public IActionResult Index()
         {
-            var list = _context.Candidates.ToList();
+            var currentUser = _userManager.GetUserName(User);
+            var list = _context.Candidates.Where(c => c.UserId == currentUser).ToList();
             return View(list);
         }
+
         public IActionResult Add()
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Add(Candidates model)
         {
-            _context.Add(model);
+            var owner = _userManager.GetUserName(User);
+            model.UserId = owner;
+            _context.Candidates.Add(model);
             _context.SaveChanges();
-
             return RedirectToAction("Index");
+
+
+
         }
         public IActionResult View(int id)
         {
