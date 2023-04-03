@@ -11,10 +11,12 @@ namespace CandidateWebApplication.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-
-        public CandidatesController(ApplicationDbContext context, UserManager<IdentityUser> userManager = null)
+        private readonly IWebHostEnvironment _env;
+        public CandidatesController(IWebHostEnvironment env, ApplicationDbContext context,
+            UserManager<IdentityUser> userManager = null)
         {
             _context = context; _userManager = userManager;
+            _env = env;
 
         }
 
@@ -31,20 +33,30 @@ namespace CandidateWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Candidates model)
+        public async Task<IActionResult> Add(Candidates model, IFormFile resume)
         {
-            var owner = _userManager.GetUserName(User);
-            model.UserId = owner;
+            if (resume != null && resume.Length > 0)
+            {
+                var filePath = Path.Combine(_env.WebRootPath, "resumes", resume.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await resume.CopyToAsync(stream);
+                }
+                model.ResumeFileName = resume.FileName;
+            }
+
+            var currentUser = _userManager.GetUserName(User);
+            model.UserId = currentUser;
+            // Save the candidate to the database
             _context.Candidates.Add(model);
             _context.SaveChanges();
+
             return RedirectToAction("Index");
-
-
-
         }
         public IActionResult View(int id)
         {
-
+            var currentUser = _userManager.GetUserName(User);
+            var list = _context.Candidates.Where(c => c.UserId == currentUser);
             var candidate = _context.Candidates.Find(id);
 
             if (candidate == null)
@@ -52,8 +64,14 @@ namespace CandidateWebApplication.Controllers
                 // Handle case where candidate is not found
                 return NotFound();
             }
-
-            return View(candidate);
+            if (currentUser == candidate.UserId)
+            {
+                return View(candidate);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
         public IActionResult Edit(int id)
         {

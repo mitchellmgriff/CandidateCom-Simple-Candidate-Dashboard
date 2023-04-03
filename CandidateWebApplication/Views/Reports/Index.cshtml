@@ -1,0 +1,26 @@
+﻿@model List<Candidates>
+
+<div class="container mx-auto">
+    <div class="card w-25 shadow-lg mt-5">
+        <div class="card-header text-black-50">
+            Report
+        </div>
+        <div class="card-body">
+            <form method="POST" asp-action="JobReport">
+            <input type="text" name="jobTitle" class="w-100" placeholder="Job Title" />
+            <br />
+            <br />
+                <input type="text" name="currentCompany"class="w-100" placeholder="Company" />
+                <br /><br />
+                <input type="number" name="salary"class="w-100" placeholder="Salary" />
+                <br /><br />
+                <input type="number" name="hourly" class="w-100" placeholder="Hourly Rate" />
+                <hr />
+            <button type="submit" class="btn btn-outline-danger w-100" asp-action="JobReport">Run</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

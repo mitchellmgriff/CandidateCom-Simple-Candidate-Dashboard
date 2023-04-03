@@ -1,8 +1,10 @@
 ﻿@model List<Candidates>
 
 <form method="post" action="@Url.Action("Delete")">
-    <a asp-controller="Candidates" asp-action="Add" class="btn btn-success">+ Add</a>
-<button type="submit" class="btn btn-danger">Delete</button>
+    
+    <a asp-controller="Candidates"  asp-action="Add" class="btn btn-success add-delete">+ Add</a>
+<button type="submit" class="btn btn-danger add-delete">Delete</button>
+    
 <br /><br />
     <table class="table">
         <thead>
@@ -21,7 +23,7 @@
         <tbody>
             @foreach (Candidates l in Model)
             {
-                <tr>
+                <tr class="bg-gradient">
                     <td><input type="checkbox" name="candidateIds" value="@l.Id" /></td>
                     <td>@l.FirstName</td>
                     <td>@l.LastName</td>

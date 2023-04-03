@@ -1,8 +1,8 @@
 ﻿@model CandidateWebApplication.Models.Candidates
 
 
-<h5 class="display-6 form-label">Add New Candidate</h5>
-<form method="POST" asp-action="Add" class="row g-3 p-5 m-auto">
+<h5 class="display-6 lbl">Add New Candidate</h5>
+<form method="POST" asp-action="Add" class="row g-3 p-5 m-auto tables" enctype="multipart/form-data">
     <div class="col-md-6">
     
         <input asp-for="FirstName" placeholder="First Name" class="form-control" />
@@ -43,7 +43,9 @@
         
         <input asp-for="Salary" placeholder="Salary" class="form-control" />
     </div>
-
+    <div class="col-12">
+        <input asp-for="Resume" type="file" placeholder="Resume (optional)" />
+    </div>
 
     <button type="submit" class="btn btn-outline-success w-50 mx-auto">Add Candidate</button>
 
