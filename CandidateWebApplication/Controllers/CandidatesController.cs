@@ -19,6 +19,27 @@ namespace CandidateWebApplication.Controllers
             _env = env;
 
         }
+        [HttpPost]
+        public IActionResult Search(string SearchString)
+        {
+            var connectedUser = _userManager.GetUserName(User);
+
+
+
+            var query = _context.Candidates
+         .Where(c => c.UserId == connectedUser &&
+             (c.FirstName.Contains(SearchString) ||
+              c.LastName.Contains(SearchString) ||
+              c.JobTitle.Contains(SearchString) ||
+              c.CompanyName.Contains(SearchString) ||
+              c.PhoneNumber.Contains(SearchString) ||
+              c.Email.Contains(SearchString)))
+         .ToList();
+
+
+
+            return View(query);
+        }
 
         public IActionResult Index()
         {
@@ -135,6 +156,7 @@ namespace CandidateWebApplication.Controllers
 
             return RedirectToAction("Index");
         }
+
 
     }
 }

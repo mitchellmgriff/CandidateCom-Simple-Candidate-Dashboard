@@ -20,5 +20,6 @@
         public string UserId { get; set; }
         public string? ResumeFileName { get; set; }
         public byte[]? Resume { get; set; } // Binary data for the resume file
+        public ICollection<Notes> Notes { get; set; }
     }
 }

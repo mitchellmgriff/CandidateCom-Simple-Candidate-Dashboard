@@ -1,7 +1,8 @@
 ﻿@model List<Candidates>
 
 
-    <div class="row">
+
+<div class="row">
         <div class="col-6">
             <a asp-controller="Candidates" asp-action="Add" class="btn btn-success add-delete">+ Add</a>
             
@@ -18,36 +19,72 @@
     </div>
 
     <table class="table">
+
         <thead>
+
             <tr>
+
                 <th scope="col"></th>
+
                 <th scope="col">First</th>
+
                 <th scope="col">Last</th>
+
                 <th scope="col">Job Title</th>
+
                 <th scope="col">Company</th>
+
                 <th scope="col">Phone</th>
+
                 <th scope="col">Email</th>
+
                 <th></th>
+
                 <th></th>
+
             </tr>
+
         </thead>
+
         <tbody>
+
             @foreach (Candidates l in Model)
+
             {
+
                 <tr class="bg-gradient">
+
                     <td><input type="checkbox" name="candidateIds" value="@l.Id" /></td>
+
                     <td>@l.FirstName</td>
+
                     <td>@l.LastName</td>
+
                     <td>@l.JobTitle</td>
+
                     <td>@l.CompanyName</td>
+
                     <td>@l.PhoneNumber</td>
+
                     <td>@l.Email</td>
+
                     <td><a asp-controller="Candidates" asp-action="Edit" asp-route-id="@l.Id" class="btn btn-outline-warning">Edit</a></td>
-                    
+
                     <td><a asp-controller="Candidates" asp-action="View" asp-route-id="@l.Id" class="btn btn-outline-warning">View</a></td>
                 <td><a asp-controller="Candidates" asp-action="Delete" asp-route-id="@l.Id" class="btn btn-danger">Delete</a></td>
                 </tr>
+
+
+
+
+
+
+
             }
+
         </tbody>
+
     </table>
+
+
 
