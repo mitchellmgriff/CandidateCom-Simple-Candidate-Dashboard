@@ -15,7 +15,7 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: #1D2228;
+    background-color: black;
     color: #E1E2E2;
 }
 .form-control {
@@ -136,4 +136,17 @@ td, th {
     margin-left: 20px;
     width: 75px;
     margin-bottom: 10px;
+}
+
+.linkedin {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.linkedin:hover {
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    border-radius: 15%;
 }

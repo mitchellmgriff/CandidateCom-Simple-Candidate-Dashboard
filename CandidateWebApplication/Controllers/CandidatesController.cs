@@ -5,54 +5,63 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CandidateWebApplication.Controllers
 {
+    // The [Authorize] attribute restricts access to the controller and its actions to authenticated users only.
+
     [Authorize]
     public class CandidatesController : Controller
     {
-
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _env;
-        public CandidatesController(IWebHostEnvironment env, ApplicationDbContext context,
-            UserManager<IdentityUser> userManager = null)
-        {
-            _context = context; _userManager = userManager;
-            _env = env;
 
+        // Constructor injection for the required services and environment
+        public CandidatesController(IWebHostEnvironment env, ApplicationDbContext context, UserManager<IdentityUser> userManager = null)
+        {
+            _context = context;
+            _userManager = userManager;
+            _env = env;
         }
+
+        // Action to perform a search based on the provided search string
         [HttpPost]
         public IActionResult Search(string SearchString)
         {
+            // Retrieve the username of the currently logged-in user
             var connectedUser = _userManager.GetUserName(User);
 
-
-
+            // Perform a search based on the provided search string
             var query = _context.Candidates
-         .Where(c => c.UserId == connectedUser &&
-             (c.FirstName.Contains(SearchString) ||
-              c.LastName.Contains(SearchString) ||
-              c.JobTitle.Contains(SearchString) ||
-              c.CompanyName.Contains(SearchString) ||
-              c.PhoneNumber.Contains(SearchString) ||
-              c.Email.Contains(SearchString)))
-         .ToList();
-
-
+                .Where(c => c.UserId == connectedUser &&
+                    (c.FirstName.Contains(SearchString) ||
+                    c.LastName.Contains(SearchString) ||
+                    c.JobTitle.Contains(SearchString) ||
+                    c.CompanyName.Contains(SearchString) ||
+                    c.PhoneNumber.Contains(SearchString) ||
+                    c.Email.Contains(SearchString) || c.Id.Equals(SearchString)))
+                .ToList();
 
             return View(query);
         }
 
+        // Action to display the list of candidates associated with the current user
         public IActionResult Index()
         {
+            // Retrieve the username of the currently logged-in user
             var currentUser = _userManager.GetUserName(User);
+
+            // Retrieve a list of candidates associated with the current user
             var list = _context.Candidates.Where(c => c.UserId == currentUser).ToList();
+
             return View(list);
         }
 
+        // Action to display the form for adding a new candidate
         public IActionResult Add()
         {
             return View();
         }
 
+        // Action to handle the form submission for adding a new candidate
         [HttpPost]
         public async Task<IActionResult> Add(Candidates model, IFormFile resume)
         {
@@ -66,18 +75,28 @@ namespace CandidateWebApplication.Controllers
                 model.ResumeFileName = resume.FileName;
             }
 
+            // Retrieve the username of the currently logged-in user
             var currentUser = _userManager.GetUserName(User);
+
             model.UserId = currentUser;
+
             // Save the candidate to the database
             _context.Candidates.Add(model);
             _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
+
+        // Action to view the details of a specific candidate
         public IActionResult View(int id)
         {
+            // Retrieve the username of the currently logged-in user
             var currentUser = _userManager.GetUserName(User);
+
+            // Retrieve a list of candidates associated with the current user
             var list = _context.Candidates.Where(c => c.UserId == currentUser);
+
+            // Find the candidate with the specified ID
             var candidate = _context.Candidates.Find(id);
 
             if (candidate == null)
@@ -85,6 +104,7 @@ namespace CandidateWebApplication.Controllers
                 // Handle case where candidate is not found
                 return NotFound();
             }
+
             if (currentUser == candidate.UserId)
             {
                 return View(candidate);
@@ -94,8 +114,11 @@ namespace CandidateWebApplication.Controllers
                 return NotFound();
             }
         }
+
+        // Action to display the form for editing a candidate's details
         public IActionResult Edit(int id)
         {
+            // Find the candidate with the specified ID
             var candidate = _context.Candidates.Find(id);
 
             if (candidate == null)
@@ -107,6 +130,7 @@ namespace CandidateWebApplication.Controllers
             return View(candidate);
         }
 
+        // Action to handle the form submission for editing a candidate's details
         [HttpPost]
         public IActionResult Edit(Candidates candidate)
         {
@@ -117,6 +141,7 @@ namespace CandidateWebApplication.Controllers
                 return NotFound();
             }
 
+            // Update the candidate's details
             existingCandidate.FirstName = candidate.FirstName;
             existingCandidate.LastName = candidate.LastName;
             existingCandidate.JobTitle = candidate.JobTitle;
@@ -134,29 +159,34 @@ namespace CandidateWebApplication.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int[] candidateIds)
+        // Action to handle the deletion of a candidate
+        [HttpPost]
+        public IActionResult Delete(int candidateId)
         {
+            // Find the candidate with the specified ID
+            var candidate = _context.Candidates.Find(candidateId);
 
-            if (candidateIds == null || candidateIds.Length == 0)
+            if (candidate == null)
             {
-                // Handle case where no candidates were selected
-                return RedirectToAction("Index");
+                // Handle case where candidate is not found
+                return NotFound();
             }
 
-            foreach (int id in candidateIds)
+            if (candidate != null)
             {
-                var candidate = _context.Candidates.Find(id);
-                if (candidate != null)
-                {
-                    _context.Candidates.Remove(candidate);
-                }
+                // Remove the candidate from the database
+                _context.Candidates.Remove(candidate);
+                _context.SaveChanges();
             }
-
-            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
-
-
     }
+
+
+
 }
+
+
+
+

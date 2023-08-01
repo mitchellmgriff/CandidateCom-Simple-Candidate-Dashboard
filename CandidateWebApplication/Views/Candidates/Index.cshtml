@@ -16,13 +16,13 @@
             </form>
         </div>
     </div>
-
+    <div class="container-fluid mx-auto">
     <table class="table">
         <thead>
             <tr>
-                <th scope="col"></th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
+                
+                <th scope="col">ID</th>
+                <th scope="col">Full Name</th>
                 <th scope="col">Job Title</th>
                 <th scope="col">Company</th>
                 <th scope="col">Phone</th>
@@ -34,10 +34,9 @@
         <tbody>
             @foreach (Candidates l in Model)
             {
-                <tr class="bg-gradient">
-                    <td><input type="checkbox" name="candidateIds" value="@l.Id" /></td>
-                    <td>@l.FirstName</td>
-                    <td>@l.LastName</td>
+                <tr>
+                    <td>@l.Id</td>
+                    <td>@l.FirstName @l.LastName</td>
                     <td>@l.JobTitle</td>
                     <td>@l.CompanyName</td>
                     <td>@l.PhoneNumber</td>
@@ -45,9 +44,17 @@
                     <td><a asp-controller="Candidates" asp-action="Edit" asp-route-id="@l.Id" class="btn btn-outline-warning">Edit</a></td>
                     
                     <td><a asp-controller="Candidates" asp-action="View" asp-route-id="@l.Id" class="btn btn-outline-warning">View</a></td>
-                <td><a asp-controller="Candidates" asp-action="Delete" asp-route-id="@l.Id" class="btn btn-danger">Delete</a></td>
+                <td>
+                <td>
+                    <form method="post" asp-controller="Candidates" asp-action="Delete" asp-route-candidateId="@l.Id">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+
+            </td>
                 </tr>
             }
         </tbody>
     </table>
+</div>
 
